@@ -2,11 +2,10 @@ import React from 'react'
 import './ResumeData.css'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import getCookieValue from '../../GetCookie'
 
 const ResumeData = () => {
     const { userId } = useSelector((state) => state.user);
-    const accessToken = getCookieValue('accessToken');
+    const accessToken = window.localStorage.getItem('accessToken');
     const handleClick = async (e) => {
         e.preventDefault();
         try {

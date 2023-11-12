@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import getCookieValue from '../../GetCookie';
 import axios from 'axios';
 
 const UploadCSV = () => {
-    const [CSV, setCSV] = useState(null); // Initialize CSV state to null
+    const [CSV, setCSV] = useState(null);
 
     const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0]; // Get the selected file
-        setCSV(selectedFile); // Store the selected file in the state
+        const selectedFile = e.target.files[0];
+        setCSV(selectedFile);
     }
 
     const handleSubmit = async (e) => {
@@ -15,9 +14,8 @@ const UploadCSV = () => {
         if (CSV) {
             try {
                 const formData = new FormData();
-                formData.append('file', CSV); // 'csvFile' is the field name your backend expects
-                const accessToken = getCookieValue('accessToken');
-                // Make a POST request to your backend with the FormData
+                formData.append('file', CSV);
+                const accessToken = window.localStorage.getItem('accessToken');
                 const response = await axios.post('http://127.0.0.1:8000/super/upload-csv/', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',

@@ -20,17 +20,15 @@ const Login = () => {
             const id = data.id;
             const isAdmin = data.isadmin;
             const payload = { email: email, id: id, isAdmin: isAdmin };
-            // console.log(payload);
             const accessToken = data.token.access;
-            const expirationDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000); // 90 days from now
-            document.cookie = `accessToken=${accessToken}; expires=${expirationDate.toUTCString()}; path=/`;
+            window.localStorage.setItem('accessToken', accessToken);
             dispatch(loginSuccess(payload))
         }
         catch (error) {
             console.log(error);
         }
     }
-    const state = useSelector((state) => { return state });
+    const state = useSelector((state) => { return state.user });
     const viewState = () => {
         console.log(state);
     }

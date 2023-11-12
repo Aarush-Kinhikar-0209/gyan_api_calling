@@ -8,11 +8,13 @@ import UploadResume from './Components/UploadResume/UploadResume';
 import UploadCSV from './Components/Admin/UploadCSV';
 import ResumeData from './Components/ResumeData/ResumeData.jsx';
 import ViewApplications from './Components/Admin/ViewApplications.jsx';
+import ViewAppliedInternships from './Components/Internship/ViewAppliedInternships.jsx';
+import ApplyInternship from './Components/Internship/ApplyInternship.jsx';
 
 import axios from 'axios';
-import getCookieValue from './GetCookie';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserSuccess } from './Actions/userActions';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +37,7 @@ function App() {
     }
   }
 
-  const accessToken = getCookieValue('accessToken');
+  const accessToken = window.localStorage.getItem('accessToken');
   if (accessToken) {
     loadUser(accessToken);
   }
@@ -55,6 +57,9 @@ function App() {
         <Route path='/viewapplications' element={<ViewApplications />} />'
         <Route path='/admin' element={<UploadCSV />} />
         <Route path='/resumedata' element={<ResumeData />} />
+        <Route path='/viewappliedinternships' element={<ViewAppliedInternships />} />
+        <Route path='/applyinternships' element={<ApplyInternship />} />
+        {user.isAdmin && <Route path='/xyz' element={<p>xyz</p>} />}
       </Routes>
     </Router>
   )

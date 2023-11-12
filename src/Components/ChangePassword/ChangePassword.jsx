@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import './ChangePassword.css'
 import axios from 'axios'
-import getCookieValue from '../../GetCookie'
 
 const ChangePassword = () => {
     const [password, setPassword] = useState('');
@@ -10,7 +9,7 @@ const ChangePassword = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const accessToken = getCookieValue('accessToken');
+            const accessToken = window.localStorage.getItem('accessToken');
             const config = {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
