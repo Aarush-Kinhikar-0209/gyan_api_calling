@@ -23,7 +23,6 @@ const ApplyInternship = () => {
         }
     }
 
-    //Unauthorized error
     const apply = async (e) => {
         e.preventDefault();
         if (!internshipId) {
@@ -33,9 +32,9 @@ const ApplyInternship = () => {
         try {
             const accessToken = window.localStorage.getItem('accessToken');
             console.log(accessToken);
-            const { data } = await axios.post(`http://127.0.0.1:8000/intern/apply/?user=${userProfile.userId}&internship_id=${internshipId}`, {
+            const { data } = await axios.post(`http://127.0.0.1:8000/intern/apply/?user=${userProfile.userId}&internship_id=${internshipId}`, {/*This empty message body is necessary*/ }, {
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${accessToken}`,
                 }
             });
             console.log(data);
