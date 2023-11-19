@@ -11,11 +11,13 @@ const ApplyInternship = () => {
         try {
             console.log(userProfile);
             const accessToken = window.localStorage.getItem('accessToken');
-            const { data } = await axios.get(`http://127.0.0.1:8000/intern/rec/?user=${userProfile.userId}`, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            });
+            const { data } = await axios.post(`http://127.0.0.1:8000/intern/rec/`,
+                { user: userProfile.userId },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`
+                    },
+                });
             setRecommendedInternships(data);
             console.log(data);
         } catch (error) {
@@ -32,11 +34,13 @@ const ApplyInternship = () => {
         try {
             const accessToken = window.localStorage.getItem('accessToken');
             console.log(accessToken);
-            const { data } = await axios.post(`http://127.0.0.1:8000/intern/apply/?user=${userProfile.userId}&internship_id=${internshipId}`, {/*This empty message body is necessary*/ }, {
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                }
-            });
+            const { data } = await axios.post(`http://127.0.0.1:8000/intern/apply/`,
+                { user: userProfile.userId, internship_id: internshipId },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${accessToken}`,
+                    }
+                });
             console.log(data);
         } catch (error) {
             console.log(error);

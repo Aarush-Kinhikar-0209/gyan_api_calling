@@ -20,6 +20,7 @@ const Login = () => {
             const id = data.id;
             const isAdmin = data.isadmin;
             const payload = { email: email, id: id, isAdmin: isAdmin };
+            // console.log(payload);
             const accessToken = data.token.access;
             window.localStorage.setItem('accessToken', accessToken);
             dispatch(loginSuccess(payload))

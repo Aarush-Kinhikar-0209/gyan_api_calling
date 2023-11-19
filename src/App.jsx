@@ -10,6 +10,7 @@ import ResumeData from './Components/ResumeData/ResumeData.jsx';
 import ViewApplications from './Components/Admin/ViewApplications.jsx';
 import ViewAppliedInternships from './Components/Internship/ViewAppliedInternships.jsx';
 import ApplyInternship from './Components/Internship/ApplyInternship.jsx';
+import SearchInternship from './Components/SearchInternships/SearchInternship.jsx';
 
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,9 +28,10 @@ function App() {
         }
       };
       const res = await axios.get('http://localhost:8000/profile/', config);
+      // console.log(res.data)
       const email = res.data.email;
       const id = res.data.id;
-      const isAdmin = res.data.isadmin;
+      const isAdmin = res.data.is_admin;
       dispatch(loadUserSuccess({ email, id, isAdmin }))
     }
     catch (e) {
@@ -55,10 +57,10 @@ function App() {
         <Route path='/uploadresume' element={<UploadResume />} />
         <Route path='/uploadcsv' element={<UploadCSV />} />
         <Route path='/viewapplications' element={<ViewApplications />} />'
-        <Route path='/admin' element={<UploadCSV />} />
         <Route path='/resumedata' element={<ResumeData />} />
         <Route path='/viewappliedinternships' element={<ViewAppliedInternships />} />
         <Route path='/applyinternships' element={<ApplyInternship />} />
+        <Route path='/searchinternships' element={<SearchInternship />} />
         {user.isAdmin && <Route path='/xyz' element={<p>xyz</p>} />}
       </Routes>
     </Router>

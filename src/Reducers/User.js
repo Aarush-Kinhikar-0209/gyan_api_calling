@@ -11,10 +11,12 @@ const initialState = {
 export const userReducer = createReducer(initialState, (builder) => {
     builder
         .addCase(loginSuccess, (state, action) => {
-            state.userId = action.payload.id;
-            state.email = action.payload.email;
+            const { id, email, isAdmin } = action.payload;
+            console.log(id, email, isAdmin);
+            state.userId = id;
+            state.email = email;
             state.isAuthenticated = true;
-            state.isAdmin = action.payload.isAdmin;
+            state.isAdmin = isAdmin;
             state.error = undefined;
         })
         .addCase(registerSuccess, (state, action) => {

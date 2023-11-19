@@ -9,7 +9,8 @@ const ResumeData = () => {
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.get(`http://127.0.0.1:8000/user-data/?user=${userId}`,
+            const { data } = await axios.post(`http://127.0.0.1:8000/user-data/`,
+                { user: userId },
                 {
                     headers: {
                         'Authorization': `Bearer ${accessToken}`
@@ -26,7 +27,7 @@ const ResumeData = () => {
             "skills": "['HTML', 'React', 'C', 'CSS', 'Javascript', 'Java', 'Python', 'Android Studio', 'machine learning', 'MySQL']",
             "education": "['Universal High School', 'Prakash Junior College', 'Sardar Patel Institute']"
         }
-        const { data } = await axios.put(`http://127.0.0.1:8000/user-data/?user=${userId}`, details,
+        const { data } = await axios.put(`http://127.0.0.1:8000/user-data/`, { user: userId, details },
             {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
